@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+	<appender name="FILE" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${jboss.server.log.dir}/logger.log" />
+		<param name="immediateFlush" value="true" />
+		<param name="threshold" value="debug" />
+		<param name="append" value="false" />
+		<param name="MaxFileSize" value="20MB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p] [%d] %c: %m%n" />
+		</layout>
+	</appender>
+	<appender name="REPORT_FILE" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${jboss.server.log.dir}/report.log" />
+		<param name="immediateFlush" value="true" />
+		<param name="threshold" value="debug" />
+		<param name="append" value="false" />
+		<param name="MaxFileSize" value="20MB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p] [%d] %c: %m%n" />
+		</layout>
+	</appender>
+	<!--  logger name="message.processing.core.ReportBl">
+		<level value="TRACE" />
+		<appender-ref ref="REPORT_FILE" />
+	</logger-->
+	<root>
+		<priority value="ALL" />
+		<appender-ref ref="FILE" />
+	</root>
+</log4j:configuration>
