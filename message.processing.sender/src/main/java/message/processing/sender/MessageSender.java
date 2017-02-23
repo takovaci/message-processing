@@ -28,7 +28,11 @@ public class MessageSender {
 	private QueueSession qsession;
 	private QueueSender qsender;
 	private Queue queue;
-
+/**
+ * 
+ * @param serList list of objects which sender will send to jms queue
+ * @throws Exception
+ */
 	public void sender(List<Serializable> serList) throws Exception {
 
 		try {
@@ -40,7 +44,7 @@ public class MessageSender {
 			qsender = qsession.createSender(queue);
 			qcon.start();
 			for (Serializable s : serList) {
-				Message msg = qsession.createObjectMessage(s); // text
+				Message msg = qsession.createObjectMessage(s); // object
 																// message
 				qsender.send(msg);
 			}
@@ -64,7 +68,6 @@ public class MessageSender {
 																	// "8080"
 			 props.put(Context.SECURITY_PRINCIPAL, JMS_USERNAME);
 			 props.put(Context.SECURITY_CREDENTIALS, JMS_PASSWORD);
-		//	 props.put("jboss.naming.client.ejb.context", true);
 			context = new InitialContext(props);
 			System.out.println("\n\tGot initial Context: " + context);
 		} catch (Exception e) {

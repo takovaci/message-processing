@@ -30,9 +30,9 @@ import message.processing.model.ProductDTO;
 		@ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "true") })
 public class MessageMDB implements MessageListener {
 
-	private Map<String, List<MultipleProductsDTO>> productMap = new HashMap<>();
-	private List<ProductAdjustmentDTO> productAdjustmentList = new ArrayList<>();
-	private int messageCounter = 0;
+	private Map<String, List<MultipleProductsDTO>> productMap = new HashMap<>(); //for storing products
+	private List<ProductAdjustmentDTO> productAdjustmentList = new ArrayList<>(); // for storing incomming adjustments
+	private int messageCounter = 0; // to count how many messages we have
 	private static Logger log = Logger.getLogger(MessageMDB.class);
 
 	@EJB
@@ -71,9 +71,11 @@ public class MessageMDB implements MessageListener {
 				log.trace("New error message received");
 			}
 			if (messageCounter % 10 == 0) {
+				// if number of messages is divided with 10 we create short report 
 				reportBl.createShortReport(productMap);
 			}
 			if (messageCounter % 50 == 0) {
+				// if number of messages is divided with 50 we create adjustmens report
 				reportBl.createLongReport(productAdjustmentList);
 			}
 		} catch (Exception e) {
@@ -81,7 +83,10 @@ public class MessageMDB implements MessageListener {
 		}
 
 	}
-
+/**
+ * method for subtracting from list of products
+ * @param product - contains how much from which type and which unit we calculate
+ */
 	private void subtractFromProducts(@NotNull final ProductDTO product) {
 		List<MultipleProductsDTO> list = productMap.get(product.getType());
 		if (list != null && !list.isEmpty()) {
@@ -97,7 +102,10 @@ public class MessageMDB implements MessageListener {
 		}
 
 	}
-
+/**
+ * method for multiplying products price
+ * @param product - contains how much from which type and which unit we calculate
+ */
 	private void multiplyProducts(@NotNull final ProductDTO product) {
 		List<MultipleProductsDTO> list = productMap.get(product.getType());
 		if (list != null && !list.isEmpty()) {
@@ -108,7 +116,10 @@ public class MessageMDB implements MessageListener {
 				});
 		}
 	}
-
+/**
+ * method for adding price to list of products of some type
+ * @param product - contains how much from which type and which unit we calculate
+ */
 	private void addToProducts(@NotNull final ProductDTO product) {
 		List<MultipleProductsDTO> list = productMap.get(product.getType());
 		if (list != null && !list.isEmpty()) {
@@ -126,6 +137,10 @@ public class MessageMDB implements MessageListener {
 	}
 
 
+/**
+ * method for simplify adding objects to map acording to their type
+ * @param p, object multiple product which we want to add to map
+ */
 	private void addProductToMap(@NotNull MultipleProductsDTO p) {
 		if (p.getProduct() != null && p.getProduct().getType() != null) {
 			if (productMap.containsKey(p.getProduct().getType().trim().toUpperCase())) {

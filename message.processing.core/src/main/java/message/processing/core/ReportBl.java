@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.validation.constraints.NotNull;
 
 import org.apache.log4j.Logger;
 
@@ -19,6 +18,10 @@ public class ReportBl {
 	
 	private static Logger log = Logger.getLogger(ReportBl.class);
 
+	/**
+	 *  method creates short report 
+	 * @param productMap map of all products
+	 */
 	public void createShortReport(Map<String, List<MultipleProductsDTO>> productMap) {
 		log.info("SHORT REPORT:");
 		if(productMap == null || productMap.isEmpty()){
@@ -38,7 +41,10 @@ public class ReportBl {
 		});
 		log.info("End of short report");
 	}
-
+/**
+ *  method creates long report
+ * @param productAdjustmentList - list of all adjustments
+ */
 	public void createLongReport(List<ProductAdjustmentDTO> productAdjustmentList) {
 		log.info("Application is pausing");
 		log.info("ADJUSTMENTS REPORT");
