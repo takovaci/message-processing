@@ -1,6 +1,7 @@
 # Message processing application
 
 ## Getting started
+
 This is small project for processing messages. Application accepts message objects from queue and puts them to cache. Every 10 messages we print out report about received objects and products (two types of objects contain data about products). For every 50 messages we print out report about messages which contain adjustments. Application never stops, every report is just printing out data in application at this time.     
 
 ## Prerequisites
