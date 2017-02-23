@@ -5,12 +5,11 @@ import java.io.Serializable;
 public class MultipleProductsDTO implements Serializable {
 
 	private static final long serialVersionUID = 4276643985840262445L;
-	private int numberOfProducts = 1;
-	private ProductDTO product;
+	private int numberOfProducts = 1; //default value if we use it just for one product
+	private ProductDTO product; 
 	
 	public MultipleProductsDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public MultipleProductsDTO(ProductDTO product) {
 		super();

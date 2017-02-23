@@ -6,8 +6,8 @@ public class ProductAdjustmentDTO implements Serializable {
 
 	private static final long serialVersionUID = -4729785641514350612L;
 	
-	private Operation operation;
-	private ProductDTO product;
+	private Operation operation; //we choose whitch operation we will do on
+	private ProductDTO product; // which product
 	
 	public Operation getOperation() {
 		return operation;
